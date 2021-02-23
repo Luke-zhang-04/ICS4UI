@@ -2,8 +2,6 @@
 BasedOnStyle: LLVM
 Language: Cpp
 
-PointerAlignment: Left
-
 AccessModifierOffset: 0
 AlignAfterOpenBracket: AlwaysBreak
 AlignConsecutiveAssignments: false
