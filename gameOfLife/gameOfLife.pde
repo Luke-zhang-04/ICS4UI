@@ -3,8 +3,8 @@
  * @author Luke Zhang
  */
 
-final int xSquareCount = 100;                 // Number of squares on y axis
-final int ySquareCount = 100;                 // Number of squares on x axis
+final int xSquareCount = 150;                 // Number of squares on y axis
+final int ySquareCount = 150;                 // Number of squares on x axis
 final int fps = 10;                           // Frames per second if not shouldWaitForKeypress
 final boolean shouldShowGrid = true;          // If gridlines should be shown
 final boolean shouldWaitForKeypress = false;  // If next frame should wait for spacebar
@@ -16,7 +16,7 @@ final float randomLiveThreshold = 0.6;        // Threshold for random to set a s
 
 boolean[][] cellsNow = new boolean[ySquareCount][xSquareCount];  // Cells to show
 boolean[][] cellsNext = new boolean[ySquareCount][xSquareCount]; // Cells to update
-int squareSize; // The size of a square calculated based on width and height
+float squareSize; // The size of a square calculated based on width and height
 
 void setup() {
     background(deadColor);
@@ -24,7 +24,7 @@ void setup() {
     strokeWeight(0.5);
     frameRate(fps);
 
-    squareSize = round(min(width, height) / min(xSquareCount, ySquareCount));
+    squareSize = min(width, height) / min(xSquareCount, ySquareCount);
 
     if (shouldWaitForKeypress) { // Don't automatically move to next frame if we have to wait for
                                  // keypress
