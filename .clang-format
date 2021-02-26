@@ -9,7 +9,7 @@ AlignConsecutiveBitFields: false
 AlignConsecutiveDeclarations: false
 AlignConsecutiveMacros: false
 AlignEscapedNewlines: true
-AlignOperands: true
+AlignOperands: DontAlign
 AlignTrailingComments: true
 AllowAllArgumentsOnNextLine: true
 AllowAllConstructorInitializersOnNextLine: true
