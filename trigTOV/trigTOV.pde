@@ -66,7 +66,7 @@ float roundAny(float value) {
  */
 int gcd(int first, int second) {
     int max = first > second ? first : second; // Max is first if first is larger, else second
-    int min = first < second ? first : second; // Min is second if second is larger, else first
+    int min = first < second ? first : second; // Min is first if second is larger, else first
     int remainder = max % min;                 // Remainder
 
     // If remainder is 0, return min, else repeat
