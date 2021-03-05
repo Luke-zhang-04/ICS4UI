@@ -48,6 +48,7 @@ IndentWidth: 4
 IndentWrappedFunctionNames: true
 InsertTrailingCommas: Wrapped
 KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 2
 NamespaceIndentation: All
 PointerAlignment: Left
 ReflowComments: true
