@@ -1,4 +1,9 @@
 /**
+ * Cellular Automaton: The Effects of First and Secondhand Smoking
+ * @author Luke Zhang
+ */
+
+/**
  * Represents a direction which is stored as a character.
  */
 public
@@ -73,21 +78,28 @@ class Direction {
     }
 }
 
+
 /**
  * The base class for a person with all the shared properties of a smoker and non-smoker
  */
 private abstract class Person {
     public
-    int speed;
+    static final int initialHealth = 159;
 
     public
-    boolean isSmoker;
+    final Direction direction = new Direction();
 
     public
-    Direction direction = new Direction();
+    final boolean isSmoker;
 
     public
-    int health = 159;
+    color _color;
+
+    public
+    final int speed;
+
+    public
+    float health = Person.initialHealth;
 
     public
     int framesAlive = 0;
@@ -99,17 +111,47 @@ private abstract class Person {
     }
 
     /**
-     * Gets the colour of the cell with the type color
-     * @return color of cell
+     * Method to apply health loss by subtracting the overall health and adjusting the cell's
+     * colour
+     */
+    public
+    abstract void applyHealthLoss(float loss);
+
+    /**
+     * Have to make color readonly because for some reason everything turns black if I make color
+     * public.
      */
     public
     abstract color getColor();
+
+    /**
+     * Calculates the remaining lifespan based on the lifespan of a human, their health level,
+     * and their frames alive
+     * @return this cells remaining lifespan in frames
+     */
+    public
+    int calculateRemainingLifespan(int maxAge) {
+        final int healthSub = round(75 - 6 * sqrt(this.health));
+
+        return maxAge - this.framesAlive - max(healthSub, 0);
+    }
+
+    @Override public String toString() {
+        return String.format(
+            "%s with speed %d, direction %c, and health %d. Alive for %d frames.",
+            this.isSmoker ? "Smoker" : "Non-smoker",
+            this.speed,
+            this.direction.direction,
+            this.health,
+            this.framesAlive);
+    }
 }
+
 
 /**
  * Represents a non smoker
  */
-public class NonSmoker extends Person {
+public final class NonSmoker extends Person {
     private
     color _color = color(0, 255, 0);
 
@@ -119,7 +161,13 @@ public class NonSmoker extends Person {
     }
 
     public
-    int getColor() {
+    void applyHealthLoss(float loss) {
+        this.health -= loss;
+        this._color = color(0, 255 - (Person.initialHealth - this.health), 0);
+    }
+
+    public
+    color getColor() {
         return this._color;
     }
 }
@@ -127,7 +175,7 @@ public class NonSmoker extends Person {
 /**
  * Represents a smoker
  */
-public class Smoker extends Person {
+public final class Smoker extends Person {
     private
     color _color = color(255, 0, 0);
 
@@ -137,7 +185,13 @@ public class Smoker extends Person {
     }
 
     public
-    int getColor() {
+    void applyHealthLoss(float loss) {
+        this.health -= loss;
+        this._color = color(255 - (Person.initialHealth - this.health), 0, 0);
+    }
+
+    public
+    color getColor() {
         return this._color;
     }
 }
