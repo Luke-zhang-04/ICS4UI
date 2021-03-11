@@ -401,7 +401,7 @@ void insertNewPerson() {
         return;
     }
 
-    final int newPersonIndex = round(random(0, nullIndexes.size()));
+    final int newPersonIndex = round(random(0, nullIndexes.size() - 1));
     final Integer[] newPersonCoords = nullIndexes.get(newPersonIndex);
     final boolean isSmoker = random(0, 1) < smokerRate;
 
