@@ -41,7 +41,7 @@ class RadianExpression {
  * Rounds `value` value to the `precision`th decimal place
  * @param value - value to round
  * @param precision - decimal place to round to
- * @returns rounded float
+ * @return rounded float
  */
 float roundAny(float value, int precision) {
     final float shift = pow(10, precision);
@@ -62,7 +62,7 @@ float roundAny(float value) {
  * Recursively finds the GCD of first and second using Euclids GCD algorithm
  * @param first - first number to get GCD for
  * @param second - second number to get GCD for
- * @returns GCD of first and second
+ * @return GCD of first and second
  */
 int gcd(int first, int second) {
     int max = first > second ? first : second; // Max is first if first is larger, else second
