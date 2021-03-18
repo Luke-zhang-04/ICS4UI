@@ -27,6 +27,7 @@ AlwaysBreakTemplateDeclarations: Yes
 BinPackArguments: false
 BinPackParameters: false
 # BitFieldColonSpacing: After
+BreakAfterJavaFieldAnnotations: false
 BreakBeforeBinaryOperators: None
 BreakBeforeBraces: Attach
 BreakBeforeTernaryOperators: true
@@ -48,6 +49,7 @@ IndentWidth: 4
 IndentWrappedFunctionNames: true
 InsertTrailingCommas: Wrapped
 KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 2
 NamespaceIndentation: All
 PointerAlignment: Left
 ReflowComments: true
