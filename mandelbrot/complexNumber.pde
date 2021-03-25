@@ -68,7 +68,7 @@ class Complex {
                 : " + ";
         } else if (this.imaginary < 0) { // If there's no real number, but the imaginary number is
                                          // negative
-            operator = "-";               // The "operator" becomes a negative sign
+            operator = "-";              // The "operator" becomes a negative sign
         }
         // clang-format on
 
