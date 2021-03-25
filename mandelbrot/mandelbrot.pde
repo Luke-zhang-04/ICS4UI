@@ -4,6 +4,7 @@
  */
 
 final boolean shouldShowCenter = false; // If a "crosshair" in the center should be shown
+final boolean shouldShowShadow = true;  // Shadows around set. Will slow down genertaion.
 final int iterLimit = 200;              // Limit for checking a point
                                         // The higher the slower but more accurate
 final int increment = 1; // Increment for dots. Recommended 1, but can be increased for performance
@@ -53,21 +54,22 @@ float getB(int yCoord) {
     return ySlope * yCoord + bMax + yOffset;
 }
 
-boolean isInSet(Complex num, Complex constant, int iterations) {
+float isInSet(Complex num, Complex constant, int iterations) {
     if (iterations < iterLimit) {
-        return num.absVal() < 2 && isInSet(num.squared().add(constant), constant, iterations + 1);
+        return num.absVal() < 2 ? isInSet(num.squared().add(constant), constant, iterations + 1)
+                                : float(iterations) / iterLimit;
     }
 
-    return true;
+    return 1;
 }
 
-boolean isInSet(Complex num) {
+float isInSet(Complex num) {
     return isInSet(num, num, 0);
 }
 
 void draw() {
     background(0);
-    fill(255, 255, 255);
+    fill(0, 0, 0);
     stroke(255, 255, 255);
     strokeWeight(increment * 2); // Stroke weight 2 because the set will turn grey if smaller
 
@@ -77,8 +79,18 @@ void draw() {
         for (int yCoord = 0; yCoord < height; yCoord += increment) {
             float b = getB(yCoord);
             Complex currentPoint = new Complex(a, b);
+            float setInclusivity = isInSet(currentPoint);
 
-            if (isInSet(currentPoint)) {
+            if (shouldShowShadow) {
+                if (setInclusivity == 1) {
+                    stroke(255, 255, 255);
+                } else {
+                    stroke(0, 0, 255 * setInclusivity * 10);
+                }
+            }
+
+
+            if (shouldShowShadow || setInclusivity == 1) {
                 point(xCoord, yCoord);
             }
         }
