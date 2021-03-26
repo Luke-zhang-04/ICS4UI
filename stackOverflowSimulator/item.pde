@@ -34,8 +34,10 @@ abstract class Item {
         this(user, content, System.currentTimeMillis());
     }
 
-    public void upvote() {
+    public
+    void upvote() {
         this.upvotes++;
+        this.user.reputation += 1;
     }
 
     abstract int getScore();

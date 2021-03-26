@@ -11,13 +11,6 @@ int _questionId = 0;
  * Inheritance goes as follows: Question extends Post extends Item
  */
 class Question extends Post {
-    /**
-     * If post was flagged, the reason will be a string. If it wasn't, it will be null
-     * A post can be flagged for duplicate, spam, needs improvement, or whatever else
-     */
-    public
-    String flag = null;
-
     public
     final ArrayList<Tag> tags = new ArrayList<Tag>();
 
@@ -67,8 +60,72 @@ class Question extends Post {
         return answer;
     }
 
+    public
+    Answer markBestAnswer(int id) {
+        if (this.bestAnswer != null) {
+            return this.bestAnswer;
+        }
+
+        for (Answer answer : this.answers) {
+            if (answer.id == id) {
+                answer.isBestAnswer = true;
+                this.bestAnswer = answer;
+
+                return answer;
+            }
+        }
+
+        return null;
+    }
+
+    public
+    Answer markBestAnswer(Answer bestAnswer) {
+        if (this.bestAnswer != null) {
+            return this.bestAnswer;
+        }
+
+        if (bestAnswer.question.id == this.id) {
+            bestAnswer.isBestAnswer = true;
+            this.bestAnswer = bestAnswer;
+
+            return bestAnswer;
+        }
+
+        return null;
+    }
+
     @Override public String toString() {
-        return String.format("%d - %s\n    %s", this.getScore(), this.title, this.content);
+        return String.format(
+            "QUESTION - %d - by %s - **%s**\n\n%s\n\nTAGS: %s\n\nCOMMENTS:\n%s\n\nANSWERS:\n%s",
+            this.getScore(),
+            this.user.name,
+            this.title,
+            this.content,
+            this.getTagsString(),
+            this.getCommentsString(),
+            this.getAnswersString());
+    }
+
+    protected
+    String getAnswersString() {
+        String answersString = "";
+
+        for (Answer answer : this.answers) {
+            answersString += "\n" + answer.toString();
+        }
+
+        return answersString.trim();
+    }
+
+    protected
+    String getTagsString() {
+        final ArrayList<String> stringTags = new ArrayList<String>();
+
+        for (Tag tag : this.tags) {
+            stringTags.add(tag.toString());
+        }
+
+        return String.join(", ", stringTags);
     }
 
     /** Sets the tags for the question and globally */

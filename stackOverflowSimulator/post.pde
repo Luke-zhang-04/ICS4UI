@@ -48,5 +48,22 @@ abstract class Post extends Item {
     public
     void downvote() {
         this.downvotes++;
+        this.user.reputation -= 10;
+    }
+
+    @Override public void upvote() {
+        this.upvotes++;
+        this.user.reputation += 10;
+    }
+
+    protected
+    String getCommentsString() {
+        String commentsString = "";
+
+        for (Comment comment : this.comments) {
+            commentsString += "\n" + comment.toString();
+        }
+
+        return commentsString.trim();
     }
 }

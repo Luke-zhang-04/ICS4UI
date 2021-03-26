@@ -15,6 +15,17 @@ class Tag {
         this.name = name;
     }
 
+    public
+    String getQuestionsString() {
+        String questionsString = String.format("Questions for tag %s:", this.name);
+
+        for (Question question : this.questions) {
+            questionsString += "\n - " + question.title;
+        }
+
+        return questionsString.trim();
+    }
+
     @Override public String toString() {
         return this.name;
     }

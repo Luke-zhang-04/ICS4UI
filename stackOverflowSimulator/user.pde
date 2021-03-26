@@ -25,15 +25,29 @@ class User {
     }
 
     public
-    Question askQuestion(Question question) {
-        this.questions.add(question);
+    Question askQuestion(String title, String content, long timestamp, String[] tags) {
+        return new Question(this, title, content, timestamp, tags);
+    }
 
-        return question;
+    public
+    Question askQuestion(String title, String content, String[] tags) {
+        return new Question(this, title, content, tags);
+    }
+
+    public
+    void upvote(Item item) {
+        item.upvote();
+    }
+
+    public
+    void downvote(Post post) {
+        post.downvote();
     }
 
     @Override public String toString() {
         return String.format(
             "%s: %d reputation, %d questions, %d answers, and %d comments",
+            this.name,
             this.reputation,
             this.questions.size(),
             this.answers.size(),

@@ -34,4 +34,14 @@ class Answer extends Post {
         user.answers.add(this);
         _answerId++;
     }
+
+    @Override public String toString() {
+        return String.format(
+            "%sANSWER - %d - by %s\n\n%s\n\nCOMMENTS:\n%s",
+            this.isBestAnswer ? "\u2713 " /* Unicode checkmark */ : "",
+            this.getScore(),
+            this.user.name,
+            this.content,
+            this.getCommentsString());
+    }
 }
