@@ -186,6 +186,13 @@ void drawStats() {
 
     // Stats section
     rect(width - 250, 0, 250, height);
+
+    if (robot1.isAtBridge && !robot2.isWinner) {
+        robot1.isWinner = true;
+    } else if (robot2.isAtBridge && !robot1.isWinner) {
+        robot2.isWinner = true;
+    }
+
     drawRobotStats(robot1, 50, "Robot 1");
     drawRobotStats(robot2, 162, "Robot 2");
 }

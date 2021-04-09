@@ -44,6 +44,9 @@ class Robot {
     public
     boolean isAtBridge = false;
 
+    public
+    boolean isWinner = false;
+
     /** Number of steps the robot has taken */
     public
     int stepCount = 0;
@@ -157,6 +160,7 @@ class Robot {
         this._nextTarget = 0;
         this._direction = -1;
         this.isAtBridge = false;
+        this.isWinner = false;
     }
 
     /** Get the absolute position of the left of the robot image in pixels, subtracted by offset */
@@ -173,10 +177,11 @@ class Robot {
 
     @Override public String toString() {
         return String.format(
-            "Algo: %s\nSteps: %d\nDone: %s",
+            "Algo: %s\nSteps: %d\nDone: %s%s",
             this.getAlgo(),
             this.stepCount,
-            this.isAtBridge ? "yes" : "no");
+            this.isAtBridge ? "yes" : "no",
+            this.isWinner ? " (winner)" : "");
     }
 
     /** Check if the robot is at the bridge */

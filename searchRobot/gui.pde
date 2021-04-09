@@ -36,6 +36,7 @@ void robotStartXSliderChange(GSlider source, GEvent event) { //_CODE_:robotStart
     robotStartX = robotStartXSlider.getValueI();
     robot1.origin = robotStartX;
     robot2.origin = robotStartX;
+    reset();
     handleSliderChange();
 } //_CODE_:robotStartXSlider:682412:
 
