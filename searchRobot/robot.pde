@@ -27,7 +27,7 @@ class Robot {
      * If algo is multiplying, it multiplies by algoFactor
      */
     public
-    final int algoFactor;
+    int algoFactor;
 
     /** Y coord of the bot relative to the whole screen in pixels */
     public

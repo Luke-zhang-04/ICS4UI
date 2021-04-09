@@ -8,7 +8,7 @@
  */
 class Wave {
     public
-    int x = round(random(0, displayWidth));
+    int x = round(random(0, animationWidth));
 
     public
     int y = round(random(height / 2 - riverHeight / 2 + 100, height / 2 + riverHeight / 2));
@@ -64,7 +64,7 @@ class Wave {
         this.x -= this.speed;
 
         if (this.x < 0) {
-            this.x = displayWidth + 100;
+            this.x = animationWidth + 100;
         }
     }
 }

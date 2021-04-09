@@ -5,23 +5,25 @@
 
 import g4p_controls.*;
 
-// Configurable
-int riverHeight = 200;
-int waveCount = 10;
+// Configurable with sliders
 int pxPerStep = 15; // Number of pixels in a step. The robot walks 1 step per frame
                     // Must be smaller than bridgeWidth
 int robotStartX = 500;
 int cgAlgoIncrement = 1; // Constant growth algo increment; amt to increase the distance each time
 int multiAlgoMultipler = 2; // Multiplication algorithm multiplier
+int bridgeX = 100;
+
+// Configurable
+int riverHeight = 200;
+int waveCount = 10;
 int fps = 30;
 
 final int initialPxPerStep = 15;
 Wave[] waves = new Wave[waveCount];
-int bridgeX = 100;
 final int bridgeWidth = 50;
 Robot robot1;
 Robot robot2;
-int displayWidth; // Width for displaying river and stuff, excluding the stats section
+int animationWidth; // Width for displaying river and stuff, excluding the stats section
 boolean isPaused = false;
 boolean shouldMoveRobots = true; // First frame after reset, do not move the robots
 
@@ -33,7 +35,7 @@ void setup() {
     size(1250, 600);
     frameRate(fps);
 
-    displayWidth = 1000;
+    animationWidth = 1000;
 
     for (int i = 0; i < waveCount; i++) {
         waves[i] = new Wave(); // Have to do this because new Wave[waveCount] doesn't instantiate?
@@ -65,7 +67,7 @@ void setup() {
 void drawRiver() {
     noStroke();
     fill(#0067a5);
-    rect(0, height / 2 - riverHeight / 2, displayWidth, riverHeight);
+    rect(0, height / 2 - riverHeight / 2, animationWidth, riverHeight);
 
     for (Wave wave : waves) {
         wave.move();
@@ -142,18 +144,22 @@ void drawStats() {
     }
 
     // Display scale at the bottom
-    line(displayWidth - 10, height - 10, displayWidth - 10 - pxPerStep * multiplier, height - 10);
+    line(
+        animationWidth - 10,
+        height - 10,
+        animationWidth - 10 - pxPerStep * multiplier,
+        height - 10);
     strokeWeight(2);
-    line(displayWidth - 10, height - 10, displayWidth - 10 - pxPerStep, height - 10);
+    line(animationWidth - 10, height - 10, animationWidth - 10 - pxPerStep, height - 10);
     text(
         String.format("%d steps", multiplier),
-        displayWidth - 10 - pxPerStep * multiplier,
+        animationWidth - 10 - pxPerStep * multiplier,
         height - 20);
 
     // Stats section
     rect(width - 250, 0, 250, height);
     drawRobotStats(robot1, 50, "Robot 1");
-    drawRobotStats(robot2, 175, "Robot 2");
+    drawRobotStats(robot2, 162, "Robot 2");
 }
 
 void draw() {
