@@ -28,8 +28,7 @@ void buttonPlayClick(GButton source, GEvent event) { //_CODE_:buttonPlay:715536:
 public
 void pxPerStepSliderChange(GSlider source, GEvent event) { //_CODE_:pxPerStepSlider:244416:
     pxPerStep = pxPerStepSlider.getValueI();
-    robot1.offsetStep(pxPerStep);
-    robot2.offsetStep(pxPerStep);
+    handleSliderChange();
 } //_CODE_:pxPerStepSlider:244416:
 
 public
@@ -37,33 +36,39 @@ void robotStartXSliderChange(GSlider source, GEvent event) { //_CODE_:robotStart
     robotStartX = robotStartXSlider.getValueI();
     robot1.origin = robotStartX;
     robot2.origin = robotStartX;
+    handleSliderChange();
 } //_CODE_:robotStartXSlider:682412:
 
 public
 void bridgeXSliderChange(GSlider source, GEvent event) { //_CODE_:bridgeXSlider:261755:
     bridgeX = bridgeXSlider.getValueI();
+    handleSliderChange();
 } //_CODE_:bridgeXSlider:261755:
 
 public
 void robot1FactorChange(GSlider source, GEvent event) { //_CODE_:robot1Factor:703518:
     multiAlgoMultipler = robot1Factor.getValueI();
     robot1.algoFactor = multiAlgoMultipler;
+    handleSliderChange();
 } //_CODE_:robot1Factor:703518:
 
 public
 void robot2FactorChange(GSlider source, GEvent event) { //_CODE_:robot2Factor:343440:
     cgAlgoIncrement = robot2Factor.getValueI();
     robot2.algoFactor = cgAlgoIncrement;
+    handleSliderChange();
 } //_CODE_:robot2Factor:343440:
 
 public
 void robot1SpeedChange(GSlider source, GEvent event) { //_CODE_:robot1Speed:488491:
     robot1.speed = robot1Speed.getValueI();
+    handleSliderChange();
 } //_CODE_:robot1Speed:488491:
 
 public
 void robot2SpeedChange(GSlider source, GEvent event) { //_CODE_:robot2Speed:810337:
     robot2.speed = robot2Speed.getValueI();
+    handleSliderChange();
 } //_CODE_:robot2Speed:810337:
 
 

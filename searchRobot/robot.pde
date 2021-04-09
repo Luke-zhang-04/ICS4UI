@@ -111,9 +111,6 @@ class Robot {
     }
 
     public
-    void offsetStep(int step) {}
-
-    public
     void draw() {
         image(
             this.img,

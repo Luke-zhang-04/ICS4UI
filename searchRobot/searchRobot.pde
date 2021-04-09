@@ -27,10 +27,35 @@ Robot robot2;
 final int animationWidth = 1000; // Width for displaying river and stuff without the stats section
 boolean isPaused = false;
 boolean shouldMoveRobots = true; // First frame after reset, do not move the robots
+boolean didChangeSliderValues = false;
 
 void togglePause() {
-    isPaused = !isPaused;
+    togglePause(!isPaused);
+}
+
+void togglePause(boolean _isPaused) {
+    isPaused = _isPaused;
     buttonPlay.setText(isPaused ? "Start" : "Stop");
+
+    if (!isPaused && didChangeSliderValues) {
+        reset();
+        didChangeSliderValues = false;
+    }
+}
+
+/** Handle ANY slider change */
+void handleSliderChange() {
+    didChangeSliderValues = true;
+    togglePause(true);
+}
+
+void keyPressed() {
+    if (key == ' ') {
+        togglePause();
+    } else if (key == 'r') {
+        reset();
+        isPaused = false;
+    }
 }
 
 void setup() {
