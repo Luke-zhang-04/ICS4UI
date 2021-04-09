@@ -3,6 +3,11 @@
  * @author Luke Zhang
  */
 
+/**
+ * Robot class for finding the bridge
+ * How it works:
+ * The origin the middle of the
+ */
 class Robot {
     /** Width and height of robot images */
     public
@@ -46,10 +51,6 @@ class Robot {
     /** Number of turns the robot made */
     public
     int turnCount = 0;
-
-    /** Elapsed time in ms */
-    public
-    int elapsedTime = 0;
 
     /** Speed multiplier of robot */
     public
@@ -138,10 +139,6 @@ class Robot {
             this.stepCount++;
 
             this.isAtBridge = this._checkAtBridge();
-
-            if (this.isAtBridge) {
-                this.elapsedTime = millis() - startTime;
-            }
         }
     }
 
@@ -151,7 +148,6 @@ class Robot {
         this.distanceTravelled = 0;
         this.stepCount = 0;
         this.turnCount = 0;
-        this.elapsedTime = 0;
         this._x = 0;
         this._nextTarget = 0;
         this._direction = -1;
@@ -171,16 +167,11 @@ class Robot {
     }
 
     @Override public String toString() {
-        final float time = this.elapsedTime == 0
-            ? float((isPaused ? pauseTime : millis()) - startTime) / 1000
-            : float(this.elapsedTime) / 1000;
-
         return String.format(
-            "Algo: %s\nSteps: %d\nDone: %s\nElapsed time: %.2fs",
+            "Algo: %s\nSteps: %d\nDone: %s",
             this.getAlgo(),
             this.stepCount,
-            this.isAtBridge ? "yes" : "no",
-            time);
+            this.isAtBridge ? "yes" : "no");
     }
 
     /** Check if the robot is at the bridge */

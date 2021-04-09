@@ -22,18 +22,10 @@ final int bridgeWidth = 50;
 Robot robot1;
 Robot robot2;
 int displayWidth; // Width for displaying river and stuff, excluding the stats section
-int startTime = millis();
-int pauseTime = millis();
 boolean isPaused = false;
 boolean shouldMoveRobots = true; // First frame after reset, do not move the robots
 
 void togglePause() {
-    if (isPaused) {
-        startTime += millis() - pauseTime;
-    } else {
-        pauseTime = millis();
-    }
-
     isPaused = !isPaused;
 }
 
@@ -139,9 +131,13 @@ void drawStats() {
 
     int multiplier = 1;
 
-    if (pxPerStep <= 25) {
+    if (pxPerStep <= 10) {
+        multiplier = 10;
+    } else if (pxPerStep <= 25) {
         multiplier = 5;
-    } else if (pxPerStep <= 5) {
+    } else if (pxPerStep <= 40) {
+        multiplier = 3;
+    } else if (pxPerStep <= 50) {
         multiplier = 2;
     }
 
@@ -157,7 +153,7 @@ void drawStats() {
     // Stats section
     rect(width - 250, 0, 250, height);
     drawRobotStats(robot1, 50, "Robot 1");
-    drawRobotStats(robot2, 200, "Robot 2");
+    drawRobotStats(robot2, 175, "Robot 2");
 }
 
 void draw() {
@@ -172,7 +168,6 @@ void draw() {
 void reset() {
     robot1.reset();
     robot2.reset();
-    startTime = millis();
 
     shouldMoveRobots = false;
     redraw();
