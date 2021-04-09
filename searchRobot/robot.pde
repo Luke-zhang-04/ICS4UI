@@ -116,7 +116,7 @@ class Robot {
     void draw() {
         image(
             this.img,
-            this.origin + this._x * pxPerStep - Robot.dimensions,
+            this.getAbsolutePosition(Robot.dimensions),
             this.y,
             Robot.dimensions,
             Robot.dimensions);
@@ -134,8 +134,8 @@ class Robot {
                 this._handleTurn();
             }
 
-            this._x += this._direction * this.speed;
-            this.stepCount += this.speed;
+            this._x += this._direction;
+            this.stepCount++;
 
             this.isAtBridge = this._checkAtBridge();
 
@@ -158,6 +158,18 @@ class Robot {
         this.isAtBridge = false;
     }
 
+    /** Get the absolute position of the left of the robot image in pixels, subtracted by offset */
+    public
+    float getAbsolutePosition(int offset) {
+        return this.origin + this._x * pxPerStep * this.speed - offset;
+    }
+
+    /** Get the absolute position of the centre of the robot image in pixels */
+    public
+    float getAbsolutePosition() {
+        return this.origin + this._x * pxPerStep * this.speed - Robot.dimensions / 2;
+    }
+
     @Override public String toString() {
         final float time = this.elapsedTime == 0
             ? float((isPaused ? pauseTime : millis()) - startTime) / 1000
@@ -174,9 +186,10 @@ class Robot {
     /** Check if the robot is at the bridge */
     private
     boolean _checkAtBridge() {
-        final float robotPosition = this.origin + this._x * pxPerStep - Robot.dimensions / 2;
+        final float robotPosition = this.getAbsolutePosition();
 
-        return robotPosition >= bridgeX && robotPosition <= bridgeX + bridgeWidth;
+        return bridgeX < this.origin ? robotPosition <= bridgeX + bridgeWidth
+                                     : robotPosition >= bridgeX;
     }
 
     /** Handle the robot making a turn */
@@ -185,8 +198,7 @@ class Robot {
         this._direction *= -1;
         this.turnCount++;
         this._nextTarget = this._getNextTarget();
-        this._markerLines.add(
-            new Point(this.origin + this._x * pxPerStep - Robot.dimensions / 2, this.y));
+        this._markerLines.add(new Point(this.getAbsolutePosition(), this.y));
     }
 
     /** Calculate how far the robot needs to move next in steps (not pixels) */
