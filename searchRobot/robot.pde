@@ -3,11 +3,6 @@
  * @author Luke Zhang
  */
 
-/**
- * Robot class for finding the bridge
- * How it works:
- * The origin the middle of the
- */
 class Robot {
     /** Width and height of robot images */
     public
@@ -109,8 +104,8 @@ class Robot {
 
     public
     String getAlgo() {
-        return this.algo.equals("add") ? String.format("Constant Growth by %d", this.algoFactor)
-                                       : String.format("Multiply by %d", this.algoFactor);
+        return this.algo.equals("CG") ? String.format("Constant Growth by %d", this.algoFactor)
+                                      : String.format("Multiply by %d", this.algoFactor);
     }
 
     public
@@ -137,6 +132,7 @@ class Robot {
 
             int nextLocation = this._x + this._direction * this.speed;
 
+            // Don't overshoot the turning point
             if (this._direction == 1 && nextLocation > this._nextTarget ||
                 this._direction == -1 && nextLocation < this._nextTarget) {
                 this.stepCount += nextLocation - this._x;
@@ -205,8 +201,8 @@ class Robot {
     /** Calculate how far the robot needs to move next in steps (not pixels) */
     private
     int _calculateMoveDistance() {
-        return this.algo.equals("add") ? this.algoFactor * this.turnCount
-                                       : int(pow(this.algoFactor, this.turnCount));
+        return this.algo.equals("CG") ? this.algoFactor * this.turnCount
+                                      : int(pow(this.algoFactor, this.turnCount));
     }
 
     /** Calculate where the robot should move next in steps */

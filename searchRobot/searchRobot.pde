@@ -6,28 +6,28 @@
 import g4p_controls.*;
 
 // Configurable with sliders
-int pxPerStep = 15; // Number of pixels in a step. The robot walks 1 step per frame
-                    // Must be smaller than bridgeWidth
-int robotStartX = 500;
+int bridgeX = 100;
 int cgAlgoIncrement = 1; // Constant growth algo increment; amt to increase the distance each time
 int multiAlgoMultipler = 2; // Multiplication algorithm multiplier
-int bridgeX = 100;
+int pxPerStep = 15;         // Number of pixels in a step. The robot walks 1 step per frame
+                            // Must be smaller than bridgeWidth
+int robotStartX = 500;
 
 // Configurable
+final int fps = 30;
 final int riverHeight = 200;
 final int waveCount = 10;
-final int fps = 30;
 
 // Not to be changed
-final int initialPxPerStep = 15;
-Wave[] waves = new Wave[waveCount];
+final int animationWidth = 1000; // Width for displaying river and stuff without the stats section
 final int bridgeWidth = 50;
+boolean didChangeSliderValues = false;
+final int initialPxPerStep = 15;
+boolean isPaused = false;
 Robot robot1;
 Robot robot2;
-final int animationWidth = 1000; // Width for displaying river and stuff without the stats section
-boolean isPaused = false;
 boolean shouldMoveRobots = true; // First frame after reset, do not move the robots
-boolean didChangeSliderValues = false;
+Wave[] waves = new Wave[waveCount];
 
 void togglePause() {
     togglePause(!isPaused);
@@ -70,7 +70,7 @@ void setup() {
     // Path might break on Windows, not sure
     robot1 = new Robot(
         "./assets/media/robot1.png",
-        "multiply",
+        "DA",
         multiAlgoMultipler,
         robotStartX,
         height / 2 - riverHeight / 2 - 100,
@@ -78,7 +78,7 @@ void setup() {
     );
     robot2 = new Robot(
         "./assets/media/robot2.png",
-        "add",
+        "CG",
         cgAlgoIncrement,
         robotStartX,
         height / 2 + riverHeight / 2 + 25,
@@ -159,7 +159,7 @@ void drawStats() {
     strokeWeight(1);
     textFont(createFont("sansserif", 15));
 
-    int multiplier = 1;
+    int multiplier = 1; // Multiplier for the scale
 
     if (pxPerStep <= 10) {
         multiplier = 10;
@@ -187,6 +187,7 @@ void drawStats() {
     // Stats section
     rect(width - 250, 0, 250, height);
 
+    // Set the winner
     if (robot1.isAtBridge && !robot2.isWinner) {
         robot1.isWinner = true;
     } else if (robot2.isAtBridge && !robot1.isWinner) {

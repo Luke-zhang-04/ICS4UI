@@ -16,6 +16,7 @@ class Wave {
     public
     final int speed = round(random(3, 4));
 
+    // Cubic bezier points
     public
     final Point anchor1;
 
