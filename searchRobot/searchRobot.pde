@@ -14,28 +14,28 @@ int multiAlgoMultipler = 2; // Multiplication algorithm multiplier
 int bridgeX = 100;
 
 // Configurable
-int riverHeight = 200;
-int waveCount = 10;
-int fps = 30;
+final int riverHeight = 200;
+final int waveCount = 10;
+final int fps = 30;
 
+// Not to be changed
 final int initialPxPerStep = 15;
 Wave[] waves = new Wave[waveCount];
 final int bridgeWidth = 50;
 Robot robot1;
 Robot robot2;
-int animationWidth; // Width for displaying river and stuff, excluding the stats section
+final int animationWidth = 1000; // Width for displaying river and stuff without the stats section
 boolean isPaused = false;
 boolean shouldMoveRobots = true; // First frame after reset, do not move the robots
 
 void togglePause() {
     isPaused = !isPaused;
+    buttonPlay.setText(isPaused ? "Start" : "Stop");
 }
 
 void setup() {
     size(1250, 600);
     frameRate(fps);
-
-    animationWidth = 1000;
 
     for (int i = 0; i < waveCount; i++) {
         waves[i] = new Wave(); // Have to do this because new Wave[waveCount] doesn't instantiate?
@@ -62,6 +62,9 @@ void setup() {
     // clang-format on
 
     createGUI();
+
+    buttonPlay.setText(isPaused ? "Start" : "Stop");
+    bridgeXSlider.setLimits(100, 0, animationWidth - bridgeWidth);
 }
 
 void drawRiver() {

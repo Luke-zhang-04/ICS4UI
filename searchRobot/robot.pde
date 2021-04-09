@@ -135,8 +135,16 @@ class Robot {
                 this._handleTurn();
             }
 
-            this._x += this._direction;
-            this.stepCount++;
+            int nextLocation = this._x + this._direction * this.speed;
+
+            if (this._direction == 1 && nextLocation > this._nextTarget ||
+                this._direction == -1 && nextLocation < this._nextTarget) {
+                this.stepCount += nextLocation - this._x;
+                this._x = this._nextTarget;
+            } else {
+                this._x = nextLocation;
+                this.stepCount += this.speed;
+            }
 
             this.isAtBridge = this._checkAtBridge();
         }
@@ -157,13 +165,13 @@ class Robot {
     /** Get the absolute position of the left of the robot image in pixels, subtracted by offset */
     public
     float getAbsolutePosition(int offset) {
-        return this.origin + this._x * pxPerStep * this.speed - offset;
+        return this.origin + this._x * pxPerStep - offset;
     }
 
     /** Get the absolute position of the centre of the robot image in pixels */
     public
     float getAbsolutePosition() {
-        return this.origin + this._x * pxPerStep * this.speed - Robot.dimensions / 2;
+        return this.origin + this._x * pxPerStep - Robot.dimensions / 2;
     }
 
     @Override public String toString() {

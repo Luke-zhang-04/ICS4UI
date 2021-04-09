@@ -58,12 +58,12 @@ void robot2FactorChange(GSlider source, GEvent event) { //_CODE_:robot2Factor:34
 
 public
 void robot1SpeedChange(GSlider source, GEvent event) { //_CODE_:robot1Speed:488491:
-    println("robot1Speed - GSlider >> GEvent." + event + " @ " + millis());
+    robot1.speed = robot1Speed.getValueI();
 } //_CODE_:robot1Speed:488491:
 
 public
 void robot2SpeedChange(GSlider source, GEvent event) { //_CODE_:robot2Speed:810337:
-    println("robot2Speed - GSlider >> GEvent." + event + " @ " + millis());
+    robot2.speed = robot2Speed.getValueI();
 } //_CODE_:robot2Speed:810337:
 
 
@@ -80,7 +80,7 @@ void createGUI() {
     buttonReset.setLocalColorScheme(GCScheme.RED_SCHEME);
     buttonReset.addEventHandler(this, "buttonResetClick");
     buttonPlay = new GButton(this, 1145, 560, 80, 30);
-    buttonPlay.setText("Play/Pause");
+    buttonPlay.setText("Start/Stop");
     buttonPlay.addEventHandler(this, "buttonPlayClick");
     label1 = new GLabel(this, 1025, 250, 200, 20);
     label1.setText("Step Size (px)");
@@ -141,7 +141,7 @@ void createGUI() {
     robot2Speed.setOpaque(false);
     robot2Speed.addEventHandler(this, "robot2SpeedChange");
     label2 = new GLabel(this, 1025, 315, 200, 20);
-    label2.setText("Pixels Per Step");
+    label2.setText("Robot Start Location");
     label2.setLocalColorScheme(GCScheme.GREEN_SCHEME);
     label2.setOpaque(false);
     label3 = new GLabel(this, 1025, 380, 200, 20);
