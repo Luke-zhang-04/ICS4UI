@@ -8,13 +8,13 @@
  */
 class Wave {
     public
-    int x = round(random(0, width));
+    int x = round(random(0, displayWidth));
 
     public
     int y = round(random(height / 2 - riverHeight / 2 + 100, height / 2 + riverHeight / 2));
 
     public
-    final int speed = round(random(3, 5));
+    final int speed = round(random(3, 4));
 
     public
     final Point anchor1;
@@ -64,7 +64,7 @@ class Wave {
         this.x -= this.speed;
 
         if (this.x < 0) {
-            this.x = width + 100;
+            this.x = displayWidth + 100;
         }
     }
 }
