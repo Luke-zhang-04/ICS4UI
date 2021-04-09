@@ -17,6 +17,10 @@ class Robot {
     public
     final int robotColor;
 
+    /**
+     * Factor at which the distance changes. If algo is adding, it grows constantly by algoFactor.
+     * If algo is multiplying, it multiplies by algoFactor
+     */
     public
     final int algoFactor;
 
@@ -35,15 +39,19 @@ class Robot {
     public
     boolean isAtBridge = false;
 
+    /** Number of steps the robot has taken */
     public
     int stepCount = 0;
 
+    /** Number of turns the robot made */
     public
     int turnCount = 0;
 
+    /** Elapsed time in ms */
     public
     int elapsedTime = 0;
 
+    /** Speed multiplier of robot */
     public
     int speed;
 
@@ -54,9 +62,11 @@ class Robot {
     private
     int _x = 0;
 
+    /** The next destination of the bot relative to the origin in steps */
     private
     int _nextTarget = 0;
 
+    /** Marker lines for where the robot made a turn */
     private
     ArrayList<Point> _markerLines = new ArrayList<Point>();
 
@@ -161,6 +171,7 @@ class Robot {
             time);
     }
 
+    /** Check if the robot is at the bridge */
     private
     boolean _checkAtBridge() {
         final float robotPosition = this.origin + this._x * pxPerStep - Robot.dimensions / 2;
@@ -168,6 +179,7 @@ class Robot {
         return robotPosition >= bridgeX && robotPosition <= bridgeX + bridgeWidth;
     }
 
+    /** Handle the robot making a turn */
     private
     void _handleTurn() {
         this._direction *= -1;
@@ -177,12 +189,14 @@ class Robot {
             new Point(this.origin + this._x * pxPerStep - Robot.dimensions / 2, this.y));
     }
 
+    /** Calculate how far the robot needs to move next in steps (not pixels) */
     private
     int _calculateMoveDistance() {
         return this.algo.equals("add") ? this.algoFactor * this.turnCount
                                        : int(pow(this.algoFactor, this.turnCount));
     }
 
+    /** Calculate where the robot should move next in steps */
     private
     int _getNextTarget() {
         return this._direction == 1 ? this._x + this._calculateMoveDistance()
