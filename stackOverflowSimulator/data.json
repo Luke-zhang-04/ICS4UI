@@ -1,0 +1,138 @@
+{
+    "//file": "A list of random names, questions, and responses",
+    "names": [
+        "Noelia",
+        "Nanci",
+        "Irish",
+        "Gertie",
+        "Anamaria",
+        "Burt",
+        "Paula",
+        "Deirdre",
+        "Rutha",
+        "Olympia",
+        "Leonila",
+        "Teddy",
+        "Ute",
+        "Ben",
+        "Lashawna",
+        "Coralee",
+        "Melida",
+        "Katrice",
+        "Rosina",
+        "Tifany",
+        "Salley",
+        "Shamika",
+        "Jeraldine",
+        "Leanora",
+        "Ron",
+        "Karlyn",
+        "Alina",
+        "Jennifer",
+        "Eura",
+        "Maisie",
+        "Maile",
+        "Wilson",
+        "Justa",
+        "Jule",
+        "Cari",
+        "Sharla",
+        "Lizette",
+        "Lacie",
+        "Amy",
+        "Shelton",
+        "Oscar",
+        "Ione",
+        "Ronald",
+        "Loriann",
+        "Shavonda",
+        "Cheri",
+        "Claudio",
+        "Silva",
+        "Stuart",
+        "Armanda"
+    ],
+    "answers": [
+        {
+            "content": "I beleive what you're looking for is an if statement. Please go read the documentation on this.",
+            "match": "if-statement|processing|python"
+        },
+        {
+            "content": "You can use the `square` function to draw a square with x, y and length",
+            "match": "processing"
+        },
+        {
+            "content": "The `fill` function to change the color of your shapes. You can specify an set of rbg colors and set the color of the next shape you draw! For example, `fill(0); square(0, 0, 100)` draws a black square at 0, 0 with 100 height and width.",
+            "match": "processing"
+        },
+        {
+            "content": "You can use the `for i in list` syntax",
+            "match": "python"
+        },
+        {
+            "content": "The `enumerate` function lets you loop through each index and value in an array, along with tuple destructuring. For example: `for index, value in [\"hello\", \"world\"]:\nprint(index, value)`\nwill print `0, \"hello\"\n1, \"world\"`",
+            "match": "python"
+        },
+        {
+            "content": "That's because arrays and objects are always passed by reference, meaning a modification will be reflected to all references.",
+            "match": ".*"
+        },
+        {
+            "content": "Processing will use integer division if the numerator is an integer. Therefore, you have to divide a float to get the answer you want. Try `3.0 / 10` or `float(myInt) / 10`.",
+            "match": "processing"
+        }
+    ],
+    "questions": [
+        {
+            "quality": 0.1,
+            "title": "Why isn't my code working?",
+            "content": "Why won't my loop print? `print(for i in range(4))` Why am I getting syntax errors?",
+            "tags": [
+                "python",
+                "loop"
+            ]
+        },
+        {
+            "quality": 0.25,
+            "title": "Why isn't my square showing up",
+            "content": "I am drawing a square but it's not showing up on the screen. I think that's weird. ```\nbackground(0);\nfill(0);\nsquare(0, 0, 250);\n```\nDoes anyone know why?",
+            "tags": [
+                "processing"
+            ]
+        },
+        {
+            "quality": 1,
+            "title": "Why is my list changing?",
+            "content": "I have this code ```\ndef foo(arr=[]):\n    arr.append(\"spam\")\n    return arr\n\nprint(foo())\nprint(foo())\nprint(foo())\n```\nwhich is printing out `['spam'] ['spam', 'spam'] ['spam', 'spam', 'spam']`",
+            "tags": [
+                "python"
+            ]
+        },
+        {
+            "quality": 0.6,
+            "title": "Why is my division result wrong?",
+            "content": "When I try to divide `3 / 10`, I get `3` instead of the expected `3.333`. What am I doing wrong?",
+            "tags": [
+                "processing",
+                "division"
+            ]
+        }
+    ],
+    "comments": {
+        "positive": [
+            "This was helpful, thanks!",
+            "I'm having the same issue!",
+            "That's really weird. Thanks though!",
+            "Why didn't I think of that? Brilliant!"
+        ],
+        "negative": [
+            "This post is terrible. What are you even trying to accomplish?",
+            "Please add more detail for clarification!",
+            "Please check the documentation",
+            "I found your answer on another post. Please check for duplicate posts before posting your own!",
+            "This literally makes 0 sense. Get a brain",
+            "Marked as duplicate",
+            "I can't beleive they let people like you program you troglodyte"
+        ]
+    }
+}
